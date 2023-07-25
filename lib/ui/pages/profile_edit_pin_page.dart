@@ -4,15 +4,15 @@ import '../../shared/theme.dart';
 import '../widgets/button.dart';
 import '../widgets/forms.dart';
 
-class ProfileEditPage extends StatelessWidget {
-  const ProfileEditPage({super.key});
+class ProfileEditPinPage extends StatelessWidget {
+  const ProfileEditPinPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Edit Profile',
+          'Edit Pin',
         ),
       ),
       body: ListView(
@@ -33,23 +33,10 @@ class ProfileEditPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const CustomFormField(
-                  title: 'Username',
+                  title: 'Old Pin',
                 ),
                 const CustomFormField(
-                  title: 'Full Name',
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                const CustomFormField(
-                  title: 'Email Address',
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                const CustomFormField(
-                  title: 'Password',
-                  obscuretext: true,
+                  title: 'New Pin',
                 ),
                 const SizedBox(
                   height: 30,

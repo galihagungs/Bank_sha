@@ -3,6 +3,8 @@ import 'package:bank__sha/ui/pages/home_page.dart';
 import 'package:bank__sha/ui/pages/onboarding_page.dart';
 import 'package:bank__sha/ui/pages/pin_page.dart';
 import 'package:bank__sha/ui/pages/profile_edit_page.dart';
+import 'package:bank__sha/ui/pages/profile_edit_pin_page.dart';
+import 'package:bank__sha/ui/pages/profile_edit_success_page.dart';
 import 'package:bank__sha/ui/pages/profile_page.dart';
 import 'package:bank__sha/ui/pages/sign_in_page.dart';
 import 'package:bank__sha/ui/pages/sign_up_page.dart';
@@ -31,6 +33,9 @@ class Myapp extends StatelessWidget {
             fontSize: 20,
             fontWeight: semibold,
           ),
+          iconTheme: IconThemeData(
+            color: blackColor,
+          ),
         ),
       ),
       routes: {
@@ -44,6 +49,8 @@ class Myapp extends StatelessWidget {
         '/home': (context) => const HomePage(),
         '/profile': (context) => const ProfilePage(),
         '/profile-edit': (context) => const ProfileEditPage(),
+        '/profile-edit-pin': (context) => const ProfileEditPinPage(),
+        '/profile-edit-success': (context) => const ProfileEditSuccessPage(),
         '/pin': (context) => const PinPage(),
       },
     );

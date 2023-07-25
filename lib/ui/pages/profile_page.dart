@@ -13,9 +13,6 @@ class ProfilePage extends StatelessWidget {
         title: const Text(
           'My Profile',
         ),
-        iconTheme: IconThemeData(
-          color: blackColor,
-        ),
       ),
       body: ListView(
         padding: const EdgeInsets.symmetric(
@@ -81,7 +78,6 @@ class ProfilePage extends StatelessWidget {
                   title: 'Edit Profile',
                   urlIcon: 'assets/ic_edit_profile.png',
                   onTap: () async {
-                    // Navigator.pushNamed(context, '/pin');
                     if (await Navigator.pushNamed(context, '/pin') == true) {
                       Navigator.pushNamed(context, '/profile-edit');
                     }
@@ -90,7 +86,11 @@ class ProfilePage extends StatelessWidget {
                 ProfileMenuItem(
                   title: 'My Pin',
                   urlIcon: 'assets/ic_mypin.png',
-                  onTap: () {},
+                  onTap: () async {
+                    if (await Navigator.pushNamed(context, '/pin') == true) {
+                      Navigator.pushNamed(context, '/profile-edit-pin');
+                    }
+                  },
                 ),
                 ProfileMenuItem(
                   title: 'Wallet Settings',

@@ -80,7 +80,12 @@ class ProfilePage extends StatelessWidget {
                 ProfileMenuItem(
                   title: 'Edit Profile',
                   urlIcon: 'assets/ic_edit_profile.png',
-                  onTap: () {},
+                  onTap: () async {
+                    // Navigator.pushNamed(context, '/pin');
+                    if (await Navigator.pushNamed(context, '/pin') == true) {
+                      Navigator.pushNamed(context, '/profile-edit');
+                    }
+                  },
                 ),
                 ProfileMenuItem(
                   title: 'My Pin',

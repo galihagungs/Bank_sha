@@ -1,5 +1,7 @@
 import 'package:bank__sha/shared/theme.dart';
+import 'package:bank__sha/ui/widgets/home_latest_transaction_item.dart';
 import 'package:bank__sha/ui/widgets/home_service_item.dart';
+import 'package:bank__sha/ui/widgets/home_user_item.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -82,6 +84,8 @@ class HomePage extends StatelessWidget {
           buildWalletCard(),
           buildLevel(),
           buildServices(),
+          buildLatestTransaction(),
+          buildSendAgain(),
         ],
       ),
     );
@@ -185,7 +189,7 @@ class HomePage extends StatelessWidget {
                 style: whiteTextStyle.copyWith(
                   fontSize: 18,
                   fontWeight: medium,
-                  letterSpacing: 7.5,
+                  letterSpacing: 5,
                 ),
               ),
             ],
@@ -282,16 +286,128 @@ class HomePage extends StatelessWidget {
           const SizedBox(
             height: 14,
           ),
-          const Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              HomeServiceItem(title: 'Top Up', iconUrl: 'assets/ic_topup.png'),
-              HomeServiceItem(title: 'Send', iconUrl: 'assets/ic_send.png'),
               HomeServiceItem(
-                  title: 'Withdraw', iconUrl: 'assets/ic_withdraw.png'),
-              HomeServiceItem(title: 'More', iconUrl: 'assets/ic_more.png'),
+                title: 'Top Up',
+                iconUrl: 'assets/ic_topup.png',
+                onTap: () {},
+              ),
+              HomeServiceItem(
+                title: 'Send',
+                iconUrl: 'assets/ic_send.png',
+                onTap: () {},
+              ),
+              HomeServiceItem(
+                title: 'Withdraw',
+                iconUrl: 'assets/ic_withdraw.png',
+                onTap: () {},
+              ),
+              HomeServiceItem(
+                title: 'More',
+                iconUrl: 'assets/ic_more.png',
+                onTap: () {},
+              ),
             ],
           )
+        ],
+      ),
+    );
+  }
+
+  Widget buildLatestTransaction() {
+    return Container(
+      margin: const EdgeInsets.only(
+        top: 30,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Latest Transactions',
+            style: blackTextStyle.copyWith(
+              fontSize: 16,
+              fontWeight: semibold,
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(22),
+            margin: const EdgeInsets.only(
+              top: 14,
+            ),
+            decoration: BoxDecoration(
+              color: whiteColor,
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: const Column(
+              children: [
+                HomeLatestTransactionItem(
+                  iconUrl: 'assets/ic_transaction_cat1.png',
+                  title: 'Top Up',
+                  time: 'Yesterday',
+                  value: '+ 450.000',
+                ),
+                HomeLatestTransactionItem(
+                  iconUrl: 'assets/ic_transaction_cat2.png',
+                  title: 'Cashback',
+                  time: 'Sep 11',
+                  value: '+ 22.000',
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildSendAgain() {
+    return Container(
+      margin: const EdgeInsets.only(
+        top: 30,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Send Again',
+            style: blackTextStyle.copyWith(
+              fontSize: 16,
+              fontWeight: semibold,
+            ),
+          ),
+          const SizedBox(
+            height: 14,
+          ),
+          // ListView(
+          //   children: [
+          //     // HomeUserItem(),
+          //   ],
+          // ),
+          const SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                HomeUserItem(
+                  imageUrl: 'assets/img_friend1.png',
+                  username: 'yuanita',
+                ),
+                HomeUserItem(
+                  imageUrl: 'assets/img_friend2.png',
+                  username: 'jani',
+                ),
+                HomeUserItem(
+                  imageUrl: 'assets/img_friend3.png',
+                  username: 'urip',
+                ),
+                HomeUserItem(
+                  imageUrl: 'assets/img_friend4.png',
+                  username: 'masa',
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );

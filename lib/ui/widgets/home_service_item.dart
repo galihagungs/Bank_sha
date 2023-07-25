@@ -14,19 +14,22 @@ class HomeServiceItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          height: 70,
-          width: 70,
-          margin: const EdgeInsets.only(bottom: 8),
-          decoration: BoxDecoration(
-            color: whiteColor,
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Center(
-            child: Image.asset(
-              iconUrl,
-              width: 26,
-              height: 26,
+        GestureDetector(
+          onTap: onTap,
+          child: Container(
+            height: 70,
+            width: 70,
+            margin: const EdgeInsets.only(bottom: 8),
+            decoration: BoxDecoration(
+              color: whiteColor,
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Center(
+              child: Image.asset(
+                iconUrl,
+                width: 26,
+                height: 26,
+              ),
             ),
           ),
         ),

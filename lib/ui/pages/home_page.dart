@@ -1,3 +1,4 @@
+import 'package:bank__sha/shared/shared_method.dart';
 import 'package:bank__sha/shared/theme.dart';
 import 'package:bank__sha/ui/widgets/home_latest_transaction_item.dart';
 import 'package:bank__sha/ui/widgets/home_service_item.dart';
@@ -209,7 +210,7 @@ class HomePage extends StatelessWidget {
             ),
           ),
           Text(
-            'Rp 12.500',
+            formatCurrency(12500),
             style: whiteTextStyle.copyWith(
               fontSize: 24,
               fontWeight: semibold,
@@ -248,7 +249,7 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               Text(
-                ' of Rp 20.000',
+                ' of ${formatCurrency(20000)}',
                 style: blackTextStyle.copyWith(
                   fontSize: 14,
                   fontWeight: semibold,
@@ -354,19 +355,19 @@ class HomePage extends StatelessWidget {
               color: whiteColor,
               borderRadius: BorderRadius.circular(20),
             ),
-            child: const Column(
+            child: Column(
               children: [
                 HomeLatestTransactionItem(
                   iconUrl: 'assets/ic_transaction_cat1.png',
                   title: 'Top Up',
                   time: 'Yesterday',
-                  value: '+ 450.000',
+                  value: '+ ${formatCurrency(450000, symbol: '')}',
                 ),
                 HomeLatestTransactionItem(
                   iconUrl: 'assets/ic_transaction_cat2.png',
                   title: 'Cashback',
                   time: 'Sep 11',
-                  value: '+ 22.000',
+                  value: '+ ${formatCurrency(22000, symbol: '')}',
                 ),
               ],
             ),

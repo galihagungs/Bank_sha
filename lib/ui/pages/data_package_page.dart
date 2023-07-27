@@ -1,3 +1,4 @@
+import 'package:bank__sha/shared/shared_method.dart';
 import 'package:bank__sha/shared/theme.dart';
 import 'package:bank__sha/ui/widgets/button.dart';
 import 'package:flutter/material.dart';
@@ -72,22 +73,22 @@ Widget buildResults(BuildContext context) {
             children: [
               DataPackageItem(
                 title: '10GB',
-                price: 'Rp 218.000',
+                price: 218000,
                 isSelected: false,
               ),
               DataPackageItem(
                 title: '25GB',
-                price: 'Rp 420.000',
+                price: 420000,
                 isSelected: false,
               ),
               DataPackageItem(
                 title: '40GB',
-                price: 'Rp 2.500.000',
+                price: 2500000,
                 isSelected: true,
               ),
               DataPackageItem(
                 title: '99GB',
-                price: 'Rp 5.000.000',
+                price: 5000000,
                 isSelected: false,
               ),
             ],

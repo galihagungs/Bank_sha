@@ -1,9 +1,11 @@
 import 'package:bank__sha/shared/theme.dart';
 import 'package:flutter/material.dart';
 
+import '../../shared/shared_method.dart';
+
 class DataPackageItem extends StatelessWidget {
   final String title;
-  final String price;
+  final num price;
   final bool isSelected;
 
   const DataPackageItem({
@@ -35,7 +37,7 @@ class DataPackageItem extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            '10GB',
+            title,
             style: blackTextStyle.copyWith(
               fontSize: 32,
               fontWeight: medium,
@@ -45,7 +47,7 @@ class DataPackageItem extends StatelessWidget {
             height: 6,
           ),
           Text(
-            'Rp 218.000',
+            formatCurrency(price),
             style: greyTextStyle.copyWith(
               fontSize: 12,
             ),

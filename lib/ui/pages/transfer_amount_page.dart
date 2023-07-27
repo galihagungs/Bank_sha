@@ -214,7 +214,10 @@ class _TransferAmountPageState extends State<TransferAmountPage> {
             onPressed: () async {
               if (await Navigator.pushNamed(context, '/pin') == true) {
                 Navigator.pushNamedAndRemoveUntil(
-                    context, '/transfer-success', (route) => false);
+                  context,
+                  '/transfer-success',
+                  (route) => false,
+                );
               }
             },
           ),

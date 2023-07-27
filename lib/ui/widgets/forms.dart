@@ -7,6 +7,7 @@ class CustomFormField extends StatelessWidget {
   final double maginTextToBox;
   final String? hint;
   final bool obscuretext;
+  final bool isShowTitle;
   final TextEditingController? controller;
 
   const CustomFormField({
@@ -16,6 +17,7 @@ class CustomFormField extends StatelessWidget {
     this.hint,
     this.obscuretext = false,
     this.controller,
+    this.isShowTitle = true,
   });
 
   @override
@@ -23,12 +25,13 @@ class CustomFormField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          title,
-          style: blackTextStyle.copyWith(
-            fontWeight: medium,
+        if (isShowTitle)
+          Text(
+            title,
+            style: blackTextStyle.copyWith(
+              fontWeight: medium,
+            ),
           ),
-        ),
         SizedBox(
           height: maginTextToBox,
         ),

@@ -1,4 +1,7 @@
+import 'package:bank__sha/models/signup_up_form.dart';
+import 'package:bank__sha/models/user_model.dart';
 import 'package:bank__sha/services/auth_service.dart';
+// ignore: depend_on_referenced_packages
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
@@ -8,7 +11,6 @@ part 'auth_state.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc() : super(AuthInitial()) {
     on<AuthEvent>((event, emit) async {
-
       if (event is AuthCheckEmail) {
         try {
           emit(AuthLoading());
@@ -19,6 +21,18 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           } else {
             emit(const AuthFailed('Email Sudah Terpakai'));
           }
+        } catch (e) {
+          emit(AuthFailed(e.toString()));
+        }
+      }
+
+      if (event is AuthRegister) {
+        try {
+          emit(AuthLoading());
+
+          final user = await AuthService().register(event.data);
+
+          emit(AuthSuccess(user));
         } catch (e) {
           emit(AuthFailed(e.toString()));
         }

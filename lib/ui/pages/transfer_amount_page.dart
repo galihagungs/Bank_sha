@@ -2,7 +2,6 @@ import 'package:bank__sha/shared/theme.dart';
 import 'package:bank__sha/ui/widgets/button.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class TransferAmountPage extends StatefulWidget {
   const TransferAmountPage({super.key});
@@ -213,6 +212,7 @@ class _TransferAmountPageState extends State<TransferAmountPage> {
             title: 'Continue',
             onPressed: () async {
               if (await Navigator.pushNamed(context, '/pin') == true) {
+                // ignore: use_build_context_synchronously
                 Navigator.pushNamedAndRemoveUntil(
                   context,
                   '/transfer-success',

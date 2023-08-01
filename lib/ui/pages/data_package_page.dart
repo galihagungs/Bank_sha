@@ -1,12 +1,9 @@
-import 'package:bank__sha/shared/shared_method.dart';
 import 'package:bank__sha/shared/theme.dart';
 import 'package:bank__sha/ui/widgets/button.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/data_package_item.dart';
 import '../widgets/forms.dart';
-import '../widgets/transfer_recent_user_item.dart';
-import '../widgets/transfer_search_user_item.dart';
 
 class DataPackagePage extends StatelessWidget {
   const DataPackagePage({super.key});
@@ -101,6 +98,7 @@ Widget buildResults(BuildContext context) {
           title: 'Continue',
           onPressed: () async {
             if (await Navigator.pushNamed(context, '/pin') == true) {
+              // ignore: use_build_context_synchronously
               Navigator.pushNamedAndRemoveUntil(
                 context,
                 '/data-success',

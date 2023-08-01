@@ -11,7 +11,7 @@ class ProfileEditPinPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Edit Pin',
         ),
       ),

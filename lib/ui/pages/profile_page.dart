@@ -79,6 +79,7 @@ class ProfilePage extends StatelessWidget {
                   urlIcon: 'assets/ic_edit_profile.png',
                   onTap: () async {
                     if (await Navigator.pushNamed(context, '/pin') == true) {
+                      // ignore: use_build_context_synchronously
                       Navigator.pushNamed(context, '/profile-edit');
                     }
                   },
@@ -88,6 +89,7 @@ class ProfilePage extends StatelessWidget {
                   urlIcon: 'assets/ic_mypin.png',
                   onTap: () async {
                     if (await Navigator.pushNamed(context, '/pin') == true) {
+                      // ignore: use_build_context_synchronously
                       Navigator.pushNamed(context, '/profile-edit-pin');
                     }
                   },

@@ -11,7 +11,7 @@ class SignInPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
-        padding: EdgeInsets.symmetric(
+        padding: const EdgeInsets.symmetric(
           horizontal: 24,
         ),
         children: [
@@ -88,6 +88,9 @@ class SignInPage extends StatelessWidget {
             onPressed: () {
               Navigator.pushNamed(context, '/sign-up');
             },
+          ),
+          const SizedBox(
+            height: 81,
           ),
         ],
       ),

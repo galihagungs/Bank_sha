@@ -4,7 +4,6 @@ import 'package:bank__sha/ui/widgets/button.dart';
 import 'package:bank__sha/ui/widgets/data_provider_item.dart';
 import 'package:flutter/material.dart';
 
-import '../widgets/topup_bank_item.dart';
 
 class DataProviderPage extends StatelessWidget {
   const DataProviderPage({super.key});

@@ -38,6 +38,7 @@ class _SignUpPageState extends State<SignUpPage> {
         listener: (context, state) {
           if (state is AuthFailed) {
             showCustomSnackbar(context, state.e);
+            // print(state.e);
           }
           if (state is AuthCheckEmailSuccess) {
             Navigator.push(
@@ -143,6 +144,9 @@ class _SignUpPageState extends State<SignUpPage> {
                 onPressed: () {
                   Navigator.pushNamed(context, '/sign-in');
                 },
+              ),
+              const SizedBox(
+                height: 81,
               ),
             ],
           );

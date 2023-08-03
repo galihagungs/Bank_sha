@@ -12,7 +12,6 @@ import 'package:bank__sha/ui/pages/profile_edit_success_page.dart';
 import 'package:bank__sha/ui/pages/profile_page.dart';
 import 'package:bank__sha/ui/pages/sign_in_page.dart';
 import 'package:bank__sha/ui/pages/sign_up_page.dart';
-import 'package:bank__sha/ui/pages/sign_up_set_ktp_page.dart';
 import 'package:bank__sha/ui/pages/sign_up_success_page.dart';
 import 'package:bank__sha/ui/pages/splash_page.dart';
 import 'package:bank__sha/ui/pages/topup_amount_page.dart';
@@ -24,7 +23,7 @@ import 'package:bank__sha/ui/pages/transfer_success_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-void main() => runApp(Myapp());
+void main() => runApp(const Myapp());
 
 class Myapp extends StatelessWidget {
   const Myapp({super.key});
@@ -34,7 +33,7 @@ class Myapp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => AuthBloc(),
+          create: (context) => AuthBloc()..add(AuthGetCurrentUser()),
         ),
       ],
       child: MaterialApp(

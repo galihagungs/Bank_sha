@@ -89,79 +89,77 @@ class _SignUpSetKtpPageState extends State<SignUpSetKtpPage> {
                   borderRadius: BorderRadius.circular(20),
                   color: whiteColor,
                 ),
-                child: Container(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      GestureDetector(
-                        onTap: () async {
-                          final image = await selectImage();
-                          setState(() {
-                            selectedImage = image;
-                          });
-                        },
-                        child: Container(
-                          width: 120,
-                          height: 120,
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: lightBackgroundColor,
-                              image: selectedImage == null
-                                  ? null
-                                  : DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image: FileImage(
-                                        File(selectedImage!.path),
-                                      ),
-                                    )),
-                          child: selectedImage != null
-                              ? null
-                              : Center(
-                                  child: Image.asset(
-                                    'assets/ic_upload.png',
-                                    width: 32,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    GestureDetector(
+                      onTap: () async {
+                        final image = await selectImage();
+                        setState(() {
+                          selectedImage = image;
+                        });
+                      },
+                      child: Container(
+                        width: 120,
+                        height: 120,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: lightBackgroundColor,
+                            image: selectedImage == null
+                                ? null
+                                : DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: FileImage(
+                                      File(selectedImage!.path),
+                                    ),
+                                  )),
+                        child: selectedImage != null
+                            ? null
+                            : Center(
+                                child: Image.asset(
+                                  'assets/ic_upload.png',
+                                  width: 32,
+                                ),
+                              ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    Text(
+                      'Passport/ID Card',
+                      style: blackTextStyle.copyWith(
+                        fontSize: 18,
+                        fontWeight: medium,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 50,
+                    ),
+                    CustomFilledButton(
+                      title: 'Continue',
+                      onPressed: () {
+                        if (validate()) {
+                          // Navigator.pushNamed(context, '/sign-up-success');
+                          context.read<AuthBloc>().add(
+                                AuthRegister(
+                                  widget.data.copyWith(
+                                    ktp: selectedImage == null
+                                        ? null
+                                        : 'data:image/png;base64,${base64Encode(
+                                            File(selectedImage!.path)
+                                                .readAsBytesSync(),
+                                          )}',
                                   ),
                                 ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      Text(
-                        'Passport/ID Card',
-                        style: blackTextStyle.copyWith(
-                          fontSize: 18,
-                          fontWeight: medium,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 50,
-                      ),
-                      CustomFilledButton(
-                        title: 'Continue',
-                        onPressed: () {
-                          if (validate()) {
-                            // Navigator.pushNamed(context, '/sign-up-success');
-                            context.read<AuthBloc>().add(
-                                  AuthRegister(
-                                    widget.data.copyWith(
-                                      ktp: selectedImage == null
-                                          ? null
-                                          : 'data:image/png;base64,${base64Encode(
-                                              File(selectedImage!.path)
-                                                  .readAsBytesSync(),
-                                            )}',
-                                    ),
-                                  ),
-                                );
-                          } else {
-                            showCustomSnackbar(
-                                context, 'Gambar Tidak Boleh Kosong');
-                          }
-                        },
-                      ),
-                    ],
-                  ),
+                              );
+                        } else {
+                          showCustomSnackbar(
+                              context, 'Gambar Tidak Boleh Kosong');
+                        }
+                      },
+                    ),
+                  ],
                 ),
               ),
               const SizedBox(

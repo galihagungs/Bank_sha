@@ -37,7 +37,7 @@ class _SignUpSetProfilePageState extends State<SignUpSetProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    print(widget.data.toJson());
+    // print(widget.data.toJson());
     return Scaffold(
       body: ListView(
         padding: const EdgeInsets.symmetric(
@@ -73,90 +73,88 @@ class _SignUpSetProfilePageState extends State<SignUpSetProfilePage> {
               borderRadius: BorderRadius.circular(20),
               color: whiteColor,
             ),
-            child: Container(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  GestureDetector(
-                    onTap: () async {
-                      final image = await selectImage();
-                      setState(() {
-                        selectedImage = image;
-                      });
-                    },
-                    child: Container(
-                      width: 120,
-                      height: 120,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: lightBackgroundColor,
-                          image: selectedImage == null
-                              ? null
-                              : DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: FileImage(
-                                    File(selectedImage!.path),
-                                  ),
-                                )),
-                      child: selectedImage != null
-                          ? null
-                          : Center(
-                              child: Image.asset(
-                                'assets/ic_upload.png',
-                                width: 32,
-                              ),
-                            ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  Text(
-                    'Shayna Hanna',
-                    style: blackTextStyle.copyWith(
-                      fontSize: 18,
-                      fontWeight: medium,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  CustomFormField(
-                    title: 'Set PIN (6 digit number)',
-                    obscuretext: true,
-                    controller: pinController,
-                    keyboardType: TextInputType.number,
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  CustomFilledButton(
-                    title: 'Continue',
-                    onPressed: () {
-                      if (validate()) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => SignUpSetKtpPage(
-                              data: widget.data.copyWith(
-                                pin: pinController.text,
-                                profilePicture: selectedImage == null
-                                    ? null
-                                    : 'data:image/png;base64,${base64Encode(
-                                        File(selectedImage!.path)
-                                            .readAsBytesSync(),
-                                      )}',
-                              ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                GestureDetector(
+                  onTap: () async {
+                    final image = await selectImage();
+                    setState(() {
+                      selectedImage = image;
+                    });
+                  },
+                  child: Container(
+                    width: 120,
+                    height: 120,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: lightBackgroundColor,
+                        image: selectedImage == null
+                            ? null
+                            : DecorationImage(
+                                fit: BoxFit.cover,
+                                image: FileImage(
+                                  File(selectedImage!.path),
+                                ),
+                              )),
+                    child: selectedImage != null
+                        ? null
+                        : Center(
+                            child: Image.asset(
+                              'assets/ic_upload.png',
+                              width: 32,
                             ),
                           ),
-                        );
-                      } else {
-                        showCustomSnackbar(context, 'Pin Harus 6 Digit');
-                      }
-                    },
                   ),
-                ],
-              ),
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                Text(
+                  'Shayna Hanna',
+                  style: blackTextStyle.copyWith(
+                    fontSize: 18,
+                    fontWeight: medium,
+                  ),
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                CustomFormField(
+                  title: 'Set PIN (6 digit number)',
+                  obscuretext: true,
+                  controller: pinController,
+                  keyboardType: TextInputType.number,
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                CustomFilledButton(
+                  title: 'Continue',
+                  onPressed: () {
+                    if (validate()) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => SignUpSetKtpPage(
+                            data: widget.data.copyWith(
+                              pin: pinController.text,
+                              profilePicture: selectedImage == null
+                                  ? null
+                                  : 'data:image/png;base64,${base64Encode(
+                                      File(selectedImage!.path)
+                                          .readAsBytesSync(),
+                                    )}',
+                            ),
+                          ),
+                        ),
+                      );
+                    } else {
+                      showCustomSnackbar(context, 'Pin Harus 6 Digit');
+                    }
+                  },
+                ),
+              ],
             ),
           ),
           const SizedBox(

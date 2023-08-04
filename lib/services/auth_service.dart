@@ -56,9 +56,12 @@ class AuthService {
         Uri.parse('$baseUrl/login'),
         body: data.toJson(),
       );
+
+      print(res.body);
+
       if (res.statusCode == 200) {
         UserModel user = UserModel.fromJson(jsonDecode(res.body));
-        user = user.copyWith(password: data.password, name: 'asu');
+        user = user.copyWith(password: data.password);
 
         // print('Btn login data2: ${user.password}');
 

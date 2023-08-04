@@ -33,6 +33,7 @@ class _SignUpSetKtpPageState extends State<SignUpSetKtpPage> {
 
   @override
   Widget build(BuildContext context) {
+    print(widget.data.toJson());
     return Scaffold(
       body: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {

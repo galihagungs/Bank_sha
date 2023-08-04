@@ -30,6 +30,7 @@ class AuthService {
 
   Future<UserModel> register(SignUpFormModel data) async {
     try {
+      print('Services : $data');
       final res = await http.post(
         Uri.parse('$baseUrl/register'),
         body: data.toJson(),

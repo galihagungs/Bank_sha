@@ -1,5 +1,3 @@
-
-
 class SignUpFormModel {
   final String? name;
   final String? email;
@@ -23,20 +21,23 @@ class SignUpFormModel {
       'email': email,
       'password': password,
       'pin': pin,
-      'profile_Picture': profilePicture,
+      'profile_picture': profilePicture,
       'ktp': ktp,
     };
   }
 
   SignUpFormModel copyWith({
+    String? name,
+    String? email,
+    String? password,
     String? pin,
     String? profilePicture,
     String? ktp,
   }) =>
       SignUpFormModel(
-        name: name,
-        email: email,
-        password: password,
+        name: name ?? this.name,
+        email: email ?? this.email,
+        password: password ?? this.password,
         pin: pin ?? this.pin,
         profilePicture: profilePicture ?? this.profilePicture,
         ktp: ktp ?? this.ktp,

@@ -37,7 +37,7 @@ class _SignUpSetProfilePageState extends State<SignUpSetProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    // print(widget.data.toJson());
+    print(widget.data.toJson());
     return Scaffold(
       body: ListView(
         padding: const EdgeInsets.symmetric(
@@ -111,7 +111,7 @@ class _SignUpSetProfilePageState extends State<SignUpSetProfilePage> {
                   height: 16,
                 ),
                 Text(
-                  'Shayna Hanna',
+                  widget.data.name.toString(),
                   style: blackTextStyle.copyWith(
                     fontSize: 18,
                     fontWeight: medium,
@@ -149,6 +149,15 @@ class _SignUpSetProfilePageState extends State<SignUpSetProfilePage> {
                           ),
                         ),
                       );
+                      // widget.data.copyWith(
+                      //   pin: pinController.text,
+                      //   profilePicture: selectedImage == null
+                      //       ? null
+                      //       : 'data:image/png;base64,${base64Encode(
+                      //           File(selectedImage!.path).readAsBytesSync(),
+                      //         )}',
+                      // );
+                      // print(widget.data.toJson());
                     } else {
                       showCustomSnackbar(context, 'Pin Harus 6 Digit');
                     }

@@ -14,7 +14,7 @@ import 'package:bank__sha/ui/pages/sign_in_page.dart';
 import 'package:bank__sha/ui/pages/sign_up_page.dart';
 import 'package:bank__sha/ui/pages/sign_up_success_page.dart';
 import 'package:bank__sha/ui/pages/splash_page.dart';
-import 'package:bank__sha/ui/pages/topup_amount_page.dart';
+// import 'package:bank__sha/ui/pages/topup_amount_page.dart';
 import 'package:bank__sha/ui/pages/topup_page.dart';
 import 'package:bank__sha/ui/pages/topup_success.dart';
 import 'package:bank__sha/ui/pages/transfer_amount_page.dart';
@@ -68,7 +68,7 @@ class Myapp extends StatelessWidget {
           '/profile-edit-success': (context) => const ProfileEditSuccessPage(),
           '/pin': (context) => const PinPage(),
           '/topup': (context) => const TopupPage(),
-          '/topup-amoount': (context) => const TopupAmountPage(),
+          // '/topup-amoount': (context) => const TopupAmountPage(),
           '/topup-success': (context) => const TopupSuccess(),
           '/transfer': (context) => const TransferPage(),
           '/transfer-amount': (context) => const TransferAmountPage(),

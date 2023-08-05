@@ -1,13 +1,21 @@
+import 'package:bank__sha/blocs/operator_card/operator_card_bloc.dart';
 import 'package:bank__sha/shared/shared_method.dart';
 import 'package:bank__sha/shared/theme.dart';
 import 'package:bank__sha/ui/widgets/button.dart';
 import 'package:bank__sha/ui/widgets/data_provider_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../blocs/auth/auth_bloc.dart';
 
-class DataProviderPage extends StatelessWidget {
+class DataProviderPage extends StatefulWidget {
   const DataProviderPage({super.key});
 
+  @override
+  State<DataProviderPage> createState() => _DataProviderPageState();
+}
+
+class _DataProviderPageState extends State<DataProviderPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,35 +42,45 @@ class DataProviderPage extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            Row(
-              children: [
-                Image.asset(
-                  'assets/img_wallet.png',
-                  width: 80,
-                  height: 55,
-                ),
-                const SizedBox(
-                  width: 16,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      '8008 2208 1280',
-                      style: blackTextStyle.copyWith(
-                        fontSize: 16,
-                        fontWeight: medium,
+            BlocBuilder<AuthBloc, AuthState>(
+              builder: (context, state) {
+                if (state is AuthSuccess) {
+                  return Row(
+                    children: [
+                      Image.asset(
+                        'assets/img_wallet.png',
+                        width: 80,
+                        height: 55,
                       ),
-                    ),
-                    Text(
-                      'Balance: ${formatCurrency(180000000)}',
-                      style: greyTextStyle.copyWith(
-                        fontSize: 12,
+                      const SizedBox(
+                        width: 16,
                       ),
-                    ),
-                  ],
-                ),
-              ],
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            state.user.cardNumber!.replaceAllMapped(
+                                RegExp(r".{4}"),
+                                (match) => "${match.group(0)} "),
+                            style: blackTextStyle.copyWith(
+                              fontSize: 16,
+                              fontWeight: medium,
+                            ),
+                          ),
+                          Text(
+                            // 'Balance: ${formatCurrency(num.parse(state.user.balance.toString()))}',
+                            'Balance: ${formatCurrency(state.user.balance ?? 0)}',
+                            style: greyTextStyle.copyWith(
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  );
+                }
+                return Container();
+              },
             ),
             const SizedBox(
               height: 40,
@@ -77,37 +95,51 @@ class DataProviderPage extends StatelessWidget {
             const SizedBox(
               height: 14,
             ),
-            const DataProviderItem(
-              iconUrl: 'assets/imp_provider_telkomsel.png',
-              nameProvider: 'Telkomsel',
-              available: 'Available',
-              isSelected: true,
-            ),
-            const DataProviderItem(
-              iconUrl: 'assets/imp_provider_indosat.png',
-              nameProvider: 'Indosat Ooredoo',
-              available: 'Available',
-            ),
-            const DataProviderItem(
-              iconUrl: 'assets/imp_provider_singtel.png',
-              nameProvider: 'Singtel ID',
-              available: 'Available',
-            ),
-            const SizedBox(
-              height: 135,
-            ),
-            CustomFilledButton(
-              title: 'Continue',
-              onPressed: () {
-                Navigator.pushNamed(context, '/data-package');
-              },
-            ),
-            const SizedBox(
-              height: 57,
-            ),
+            BlocProvider(
+              create: (context) => OperatorCardBloc()..add(OperatorCardGet()),
+              child: BlocBuilder<OperatorCardBloc, OperatorCardState>(
+                builder: (context, state) {
+                  if (state is OperatorCardSuccess) {
+                    return Column(
+                      children: [
+                        const DataProviderItem(
+                          iconUrl: 'assets/imp_provider_telkomsel.png',
+                          nameProvider: 'Telkomsel',
+                          available: 'Available',
+                          isSelected: true,
+                        ),
+                        const DataProviderItem(
+                          iconUrl: 'assets/imp_provider_indosat.png',
+                          nameProvider: 'Indosat Ooredoo',
+                          available: 'Available',
+                        ),
+                        const DataProviderItem(
+                          iconUrl: 'assets/imp_provider_singtel.png',
+                          nameProvider: 'Singtel ID',
+                          available: 'Available',
+                        ),
+                      ],
+                    );
+                  }
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                },
+              ),
+            )
           ],
         ),
       ),
+      floatingActionButton: Container(
+        margin: const EdgeInsets.all(24),
+        child: CustomFilledButton(
+          title: 'Continue',
+          onPressed: () {
+            Navigator.pushNamed(context, '/data-package');
+          },
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

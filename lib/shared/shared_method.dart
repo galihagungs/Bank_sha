@@ -26,6 +26,10 @@ String formatCurrency(
   ).format(number);
 }
 
+String dateToMonthDate(DateTime date) {
+  return DateFormat('MMMM dd').format(date);
+}
+
 Future<XFile?> selectImage() async {
   XFile? selectImage = await ImagePicker().pickImage(
     source: ImageSource.gallery,

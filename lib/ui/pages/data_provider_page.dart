@@ -1,6 +1,8 @@
 import 'package:bank__sha/blocs/operator_card/operator_card_bloc.dart';
+import 'package:bank__sha/models/operator_card_model.dart';
 import 'package:bank__sha/shared/shared_method.dart';
 import 'package:bank__sha/shared/theme.dart';
+import 'package:bank__sha/ui/pages/data_package_page.dart';
 import 'package:bank__sha/ui/widgets/button.dart';
 import 'package:bank__sha/ui/widgets/data_provider_item.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +18,8 @@ class DataProviderPage extends StatefulWidget {
 }
 
 class _DataProviderPageState extends State<DataProviderPage> {
+  OperatorCardModel? selectedOperatorCard;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -101,24 +105,20 @@ class _DataProviderPageState extends State<DataProviderPage> {
                 builder: (context, state) {
                   if (state is OperatorCardSuccess) {
                     return Column(
-                      children: [
-                        const DataProviderItem(
-                          iconUrl: 'assets/imp_provider_telkomsel.png',
-                          nameProvider: 'Telkomsel',
-                          available: 'Available',
-                          isSelected: true,
-                        ),
-                        const DataProviderItem(
-                          iconUrl: 'assets/imp_provider_indosat.png',
-                          nameProvider: 'Indosat Ooredoo',
-                          available: 'Available',
-                        ),
-                        const DataProviderItem(
-                          iconUrl: 'assets/imp_provider_singtel.png',
-                          nameProvider: 'Singtel ID',
-                          available: 'Available',
-                        ),
-                      ],
+                      children: state.operatorCards.map((operatorCard) {
+                        return GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              selectedOperatorCard = operatorCard;
+                            });
+                          },
+                          child: DataProviderItem(
+                            data: operatorCard,
+                            isSelected:
+                                operatorCard.id == selectedOperatorCard?.id,
+                          ),
+                        );
+                      }).toList(),
                     );
                   }
                   return const Center(
@@ -126,19 +126,26 @@ class _DataProviderPageState extends State<DataProviderPage> {
                   );
                 },
               ),
-            )
+            ),
           ],
         ),
       ),
-      floatingActionButton: Container(
-        margin: const EdgeInsets.all(24),
-        child: CustomFilledButton(
-          title: 'Continue',
-          onPressed: () {
-            Navigator.pushNamed(context, '/data-package');
-          },
-        ),
-      ),
+      floatingActionButton: (selectedOperatorCard != null)
+          ? Container(
+              margin: const EdgeInsets.all(24),
+              child: CustomFilledButton(
+                title: 'Continue',
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DataPackagePage(
+                            operatorCard: selectedOperatorCard!),
+                      ));
+                },
+              ),
+            )
+          : Container(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }

@@ -1,10 +1,12 @@
 import 'dart:convert';
 
+import 'package:bank__sha/models/data_plan_model.dart';
 import 'package:bank__sha/models/topup_form_model.dart';
 import 'package:bank__sha/services/auth_service.dart';
 import 'package:bank__sha/shared/shared_value.dart';
 import 'package:http/http.dart' as http;
 
+import '../models/data_form_model.dart';
 import '../models/transfer_model.dart';
 
 class TransactionService {
@@ -36,6 +38,26 @@ class TransactionService {
 
       final res = await http.post(
         Uri.parse('$baseUrl/transfers'),
+        headers: {
+          'Authorization': token,
+        },
+        body: data.toJson(),
+      );
+
+      if (res.statusCode != 200) {
+        throw jsonDecode(res.body)['message'];
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> dataPlan(DataPlanFormModel data) async {
+    try {
+      final token = await AuthService().getToken();
+
+      final res = await http.post(
+        Uri.parse('$baseUrl/data_plans'),
         headers: {
           'Authorization': token,
         },

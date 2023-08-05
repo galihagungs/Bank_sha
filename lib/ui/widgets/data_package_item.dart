@@ -1,17 +1,18 @@
 import 'package:bank__sha/shared/theme.dart';
 import 'package:flutter/material.dart';
 
+import '../../models/data_plan_model.dart';
 import '../../shared/shared_method.dart';
 
 class DataPackageItem extends StatelessWidget {
-  final String title;
-  final num price;
+  final DataPlanModel dataPlan;
   final bool isSelected;
 
   const DataPackageItem({
     super.key,
-    required this.title,
-    required this.price,
+    // required this.title,
+    // required this.price,
+    required this.dataPlan,
     this.isSelected = false,
   });
 
@@ -37,7 +38,7 @@ class DataPackageItem extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            title,
+            dataPlan.name.toString(),
             style: blackTextStyle.copyWith(
               fontSize: 32,
               fontWeight: medium,
@@ -47,7 +48,7 @@ class DataPackageItem extends StatelessWidget {
             height: 6,
           ),
           Text(
-            formatCurrency(price),
+            formatCurrency(dataPlan.price ?? 0),
             style: greyTextStyle.copyWith(
               fontSize: 12,
             ),

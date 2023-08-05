@@ -1,4 +1,5 @@
 import 'package:bank__sha/blocs/auth/auth_bloc.dart';
+import 'package:bank__sha/blocs/user/user_bloc.dart';
 import 'package:bank__sha/shared/theme.dart';
 import 'package:bank__sha/ui/pages/data_package_page.dart';
 import 'package:bank__sha/ui/pages/data_provider_page.dart';
@@ -34,6 +35,9 @@ class Myapp extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => AuthBloc()..add(AuthGetCurrentUser()),
+        ),
+        BlocProvider(
+          create: (context) => UserBloc(),
         ),
       ],
       child: MaterialApp(
@@ -71,7 +75,7 @@ class Myapp extends StatelessWidget {
           // '/topup-amoount': (context) => const TopupAmountPage(),
           '/topup-success': (context) => const TopupSuccess(),
           '/transfer': (context) => const TransferPage(),
-          '/transfer-amount': (context) => const TransferAmountPage(),
+          // '/transfer-amount': (context) => const TransferAmountPage(),
           '/transfer-success': (context) => const TransferSuccessPage(),
           '/data': (context) => const DataProviderPage(),
           '/data-package': (context) => const DataPackagePage(),

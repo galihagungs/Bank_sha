@@ -1,18 +1,15 @@
+import 'package:bank__sha/models/user_model.dart';
 import 'package:bank__sha/shared/theme.dart';
 import 'package:flutter/material.dart';
 
 class TransferSearchUserItem extends StatelessWidget {
-  final String imageUrl;
-  final String name;
-  final String username;
-  final bool isVerified;
+  final UserModel user;
+  final bool isSelected;
 
   const TransferSearchUserItem({
     super.key,
-    required this.imageUrl,
-    required this.name,
-    required this.username,
-    this.isVerified = false,
+    required this.user,
+    this.isSelected = false,
   });
 
   @override
@@ -26,6 +23,10 @@ class TransferSearchUserItem extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         color: whiteColor,
+        border: Border.all(
+          width: 2,
+          color: isSelected ? blueColor : whiteColor,
+        ),
         borderRadius: BorderRadius.circular(20),
       ),
       child: Column(
@@ -36,13 +37,14 @@ class TransferSearchUserItem extends StatelessWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage(
-                  imageUrl,
-                ),
+                image: user.profilePicture == null
+                    ? const AssetImage(
+                        'assets/img_profile.png',
+                      )
+                    : NetworkImage(user.profilePicture!) as ImageProvider,
               ),
             ),
-            child: isVerified
+            child: user.verified == 1
                 ? Align(
                     alignment: Alignment.topRight,
                     child: Container(
@@ -64,20 +66,22 @@ class TransferSearchUserItem extends StatelessWidget {
                 : null,
           ),
           const SizedBox(
-            height: 13,
+            height: 11,
           ),
           Text(
-            name,
+            user.name.toString(),
             style: blackTextStyle.copyWith(
               fontSize: 16,
               fontWeight: medium,
+              overflow: TextOverflow.ellipsis,
             ),
           ),
           Text(
-            username,
+            user.username.toString(),
             style: greyTextStyle.copyWith(
               fontSize: 12,
             ),
+            overflow: TextOverflow.ellipsis,
           )
         ],
       ),

@@ -5,6 +5,8 @@ import 'package:bank__sha/services/auth_service.dart';
 import 'package:bank__sha/shared/shared_value.dart';
 import 'package:http/http.dart' as http;
 
+import '../models/transfer_model.dart';
+
 class TransactionService {
   Future<String> topUp(TopupFormModel data) async {
     try {
@@ -23,6 +25,26 @@ class TransactionService {
       }
 
       throw jsonDecode(res.body)['message'];
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> transfer(TransferFormModel data) async {
+    try {
+      final token = await AuthService().getToken();
+
+      final res = await http.post(
+        Uri.parse('$baseUrl/transfers'),
+        headers: {
+          'Authorization': token,
+        },
+        body: data.toJson(),
+      );
+
+      if (res.statusCode != 200) {
+        throw jsonDecode(res.body)['message'];
+      }
     } catch (e) {
       rethrow;
     }
